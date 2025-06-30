@@ -1,16 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.NegosyoKo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
+    <!-- Base application theme -->
+    <style name="Theme.NegosyoKo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Primary brand colors -->
+        <item name="colorPrimary">@color/green_primary</item>             <!-- #55A859 -->
+        <item name="colorPrimaryVariant">@color/green_dark</item>         <!-- #2F7D32 -->
+        <item name="colorOnPrimary">@color/white</item>                   <!-- for buttons/text on green -->
+
+        <!-- Secondary brand colors -->
+        <item name="colorSecondary">@color/green_accent</item>           <!-- #65C26D -->
+        <item name="colorSecondaryVariant">@color/green_light</item>     <!-- #A1D89C -->
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Backgrounds -->
+        <item name="android:colorBackground">@color/background_light</item> <!-- #F2F7F1 -->
+        <item name="colorSurface">@color/card_background</item>             <!-- #E9F4E6 -->
+        <item name="colorOnSurface">@color/text_primary</item>
+
+        <!-- Status bar -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
+        <!-- Text styles -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+
+        <!-- Optional: navigation and ripple -->
+        <item name="android:navigationBarColor">@color/green_dark</item>
+        <item name="colorControlHighlight">@color/green_accent</item>
+
     </style>
 </resources>

@@ -1,15 +1,67 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# Gradle build directories
+.gradle/
+build/
+
+# Module-specific build outputs
+**/build/
+
+# Local configuration - don't commit SDK paths
 local.properties
+
+# Android Studio / IntelliJ files
+*.iml
+.idea/
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/gradle.xml
+
+# Keystore files (optional: uncomment to ignore your debug/release keys)
+# *.jks
+# *.keystore
+
+# IDE run settings
+.idea/tasks.xml
+.idea/assetWizardSettings.xml
+
+# Android Studio captures & navigation data
+navigation/
+captures/
+
+# Compiled files
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+
+# ProGuard
+proguard/
+
+# Log files
+*.log
+
+# Native build outputs
+.externalNativeBuild/
+.cxx/
+
+# Google services (API keys)
+google-services.json
+
+# fastlane artifacts
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/readme.md
+
+# Lint results
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+
+# macOS and Windows OS files
+.DS_Store
+Thumbs.db
