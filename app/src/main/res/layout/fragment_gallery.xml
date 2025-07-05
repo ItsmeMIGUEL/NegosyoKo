@@ -19,25 +19,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:gravity="center"
-                android:text="Create Order"
-                android:textColor="@color/text_primary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- Subtitle -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start a New Sale for Your Customer"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:layout_marginBottom="20dp" />
-
             <!-- Search Products Section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -132,6 +113,20 @@
                                 android:layout_marginTop="2dp" />
 
                         </LinearLayout>
+                        <!-- Replace your TextView with this Spinner implementation -->
+                        <Spinner
+                            android:id="@+id/filterSpinner"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/spinner_background"
+                            android:spinnerMode="dropdown"
+                            android:popupBackground="@color/white"
+                            android:dropDownVerticalOffset="4dp"
+                            android:dropDownWidth="160dp"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="24dp"
+                            android:textSize="12sp"/>
 
                     </LinearLayout>
 
@@ -523,6 +518,7 @@
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
+
     </ScrollView>
 
     <!-- Sticky Bottom Create Order Button -->
@@ -545,14 +541,15 @@
             app:cardElevation="4dp">
 
             <TextView
+                android:id="@+id/CreateOrderButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
                 android:text="+  Create Order"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="12dp" />
+                android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

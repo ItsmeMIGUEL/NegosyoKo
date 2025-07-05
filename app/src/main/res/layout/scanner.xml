@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <!-- Camera Preview Container -->
+    <FrameLayout
+        android:id="@+id/camera_preview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Camera preview will be added programmatically here -->
+        <SurfaceView
+            android:id="@+id/camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Scanner Overlay -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/scanner_overlay">
+
+            <!-- Top Section with Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_scanner_top_overlay"
+                android:padding="16dp">
+
+                <!-- Header Bar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/back"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/back_icon"
+                        android:tint="@color/white"
+                        android:padding="4dp"
+                        android:contentDescription="Go back" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Scan Product"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="16dp" />
+
+                    <ImageButton
+                        android:id="@+id/btn_flash"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/flash_off_icon"
+                        android:tint="@color/white"
+                        android:contentDescription="Toggle flashlight"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <!-- Instructions -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Position the barcode or QR code within the frame"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:alpha="0.9" />
+
+            </LinearLayout>
+
+            <!-- Middle Section - Scanner Frame -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <!-- Scanner Frame -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="280dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- Scanner Border -->
+                        <View
+                            android:id="@+id/scanner_border"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/scanner_border" />
+
+                        <!-- Corner Indicators -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_scanner_corner"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_margin="8dp"
+                            android:tint="@color/green_accent" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_scanner_corner"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="8dp"
+                            android:rotation="90"
+                            android:tint="@color/green_accent" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_scanner_corner"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_margin="8dp"
+                            android:rotation="270"
+                            android:tint="@color/green_accent" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_scanner_corner"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_margin="8dp"
+                            android:rotation="180"
+                            android:tint="@color/green_accent" />
+
+                        <!-- Scanning Line Animation -->
+                        <View
+                            android:id="@+id/scanning_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/bg_scanning_line"
+                            android:layout_marginHorizontal="16dp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Scan Status Text -->
+                <TextView
+                    android:id="@+id/tv_scan_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Looking for barcode..."
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="120dp"
+                    android:textStyle="italic"
+                    android:alpha="0.8" />
+
+            </FrameLayout>
+
+            <!-- Bottom Section with Actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_scanner_bottom_overlay"
+                android:padding="16dp">
+
+                <!-- Manual Entry Option -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Can't scan? Enter manually"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:alpha="0.9" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_manual_entry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="Enter Code"
+                        android:textSize="12sp"
+                        android:textColor="@color/green_primary"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="20dp"
+                        style="@style/Widget.MaterialComponents.Button" />
+
+                </LinearLayout>
+
+                <!-- Action Buttons -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_capture"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        app:icon="@drawable/search_icon"
+                        app:iconTint="@color/white"
+                        app:iconSize="32dp"
+                        app:backgroundTint="@color/green_accent"
+                        app:cornerRadius="36dp"
+                        android:contentDescription="Capture image"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Add Item"
+                        android:textAllCaps="false"
+                        app:iconTint="@color/white"
+                        app:backgroundTint="@color/green_primary"
+                        app:cornerRadius="28dp"
+                        android:contentDescription="Scan history"
+                        style="@style/Widget.MaterialComponents.Button.Icon" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Success/Error Result Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_scan_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_result_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_check_circle"
+                    android:tint="@color/green_primary" />
+
+                <TextView
+                    android:id="@+id/tv_result_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Product Found!"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginStart="8dp" />
+
+                <ImageButton
+                    android:id="@+id/btn_close_result"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_close"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/gray"
+                    android:contentDescription="Close result"
+                    android:padding="4dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_result_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Scanned: 1234567890123"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_add_to_order"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Add to Order"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/green_primary"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_add"
+                    app:iconTint="@color/white"
+                    style="@style/Widget.MaterialComponents.Button" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_scan_again"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Scan Again"
+                    android:textColor="@color/green_primary"
+                    app:backgroundTint="@color/white"
+                    app:strokeColor="@color/green_primary"
+                    app:strokeWidth="1dp"
+                    app:cornerRadius="12dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Manual Entry Dialog Overlay -->
+    <LinearLayout
+        android:id="@+id/layout_manual_entry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black"
+        android:alpha="0.9"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Product Code"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Product SKU or Barcode"
+                    android:layout_marginBottom="16dp"
+                    app:boxStrokeColor="@color/green_primary"
+                    app:hintTextColor="@color/green_accent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_manual_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:inputType="text|textCapCharacters" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_cancel_manual"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="Cancel"
+                        android:textColor="@color/text_secondary"
+                        app:backgroundTint="@color/white"
+                        app:strokeColor="@color/gray"
+                        app:strokeWidth="1dp"
+                        app:cornerRadius="12dp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_confirm_manual"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Search"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/green_primary"
+                        app:cornerRadius="12dp"
+                        style="@style/Widget.MaterialComponents.Button" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</RelativeLayout>

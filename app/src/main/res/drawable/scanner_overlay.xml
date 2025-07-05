@@ -1,0 +1,5 @@
+
+<!-- File: res/drawable/scanner_overlay.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#80000000" />
+</shape>
